@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myppa/component/product_card.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({
+  MainScreen({
     super.key,
   });
 
@@ -18,12 +19,7 @@ class MainScreen extends StatelessWidget {
       ),
 
       // Body inchangé : texte au centre
-      body: Center(
-        child: Text(
-          'Home Screen',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      body: ProductCard(),
 
       // BottomNavigationBar avec un fond coloré et des icônes contrastées
       bottomNavigationBar: bottomNav(),
