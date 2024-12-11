@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
   static const routeName = '/detail';
+
   @override
   Widget build(BuildContext context) {
     // Récupération des arguments passés lors de la navigation
+    final Map<String, dynamic> product =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "blabla",
+          product['name'],
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -22,7 +25,7 @@ class DetailScreen extends StatelessWidget {
           children: [
             // Image du produit avec une hauteur fixe
             Image.network(
-              "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+              product['imageUrl'],
               width: double.infinity,
               height: 300,
               fit: BoxFit.cover,
@@ -31,7 +34,7 @@ class DetailScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'blbla',
+                product['name'],
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -45,19 +48,31 @@ class DetailScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    '22 da',
+                    "${product['price']} da ",
                     style: TextStyle(
                       fontSize: 22,
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  (product['price'] < 50)
+                      ? Text(
+                          '50 da',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.red,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      : SizedBox(),
                   SizedBox(width: 16),
                   // Rating stars
                   Row(
                     children: List.generate(5, (index) {
                       return Icon(
-                        index < (3 ?? 0) ? Icons.star : Icons.star_border,
+                        index < (product['rating'] ?? 0)
+                            ? Icons.star
+                            : Icons.star_border,
                         color: Colors.amber,
                         size: 24,
                       );
@@ -83,7 +98,8 @@ class DetailScreen extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Text(
-                "Ceci est une description détaillée du produit. Vous pouvez y ajouter toutes les informations nécessaires pour informer l'utilisateur sur le produit.",
+                product['description'] ??
+                    "Ceci est une description détaillée du produit. Vous pouvez y ajouter toutes les informations nécessaires pour informer l'utilisateur sur le produit.",
                 style: TextStyle(fontSize: 16, color: Colors.grey[800]),
               ),
             ),

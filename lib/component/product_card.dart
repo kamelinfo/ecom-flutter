@@ -3,14 +3,16 @@ import 'package:myppa/screens/detail_screen.dart';
 
 class ProductCard extends StatelessWidget {
   final String name;
-  final String price;
+  final int price;
   final String imageUrl;
+  final int rating; // Nouvelle propriété pour le rating
   final VoidCallback? onTap;
-  ProductCard({
-    super.key,
+
+  const ProductCard({
     required this.name,
     required this.price,
     required this.imageUrl,
+    this.rating = 0, // Valeur par défaut
     this.onTap,
   });
 
@@ -18,7 +20,16 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, DetailScreen.routeName);
+        Navigator.pushNamed(
+          context,
+          DetailScreen.routeName,
+          arguments: {
+            'name': name,
+            'price': price,
+            'imageUrl': imageUrl,
+            'rating': rating, // Passer le rating
+          },
+        );
       },
       borderRadius: BorderRadius.circular(12),
       child: Card(

@@ -8,8 +8,9 @@ class MainScreen extends StatelessWidget {
   final List<Map<String, dynamic>> products = List.generate(20, (index) {
     return {
       "name": "Futuristic T-Shirt #${index + 1}",
-      "price": "${(index + 1) * 10}",
-      "imageUrl": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+      "price": (index + 1) * 10,
+      "imageUrl": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "rating": (index % 5) + 1, // Ratings de 1 à 5
     };
   });
   @override
@@ -53,6 +54,7 @@ class MainScreen extends StatelessWidget {
                   name: product["name"],
                   price: product["price"],
                   imageUrl: product["imageUrl"],
+                  rating: product["rating"],
                   onTap: () {
                     // Action au clic sur un produit (par ex: navigation vers détails)
                   },

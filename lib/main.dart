@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       ),
       home: MainScreen(),
       routes: {
-        // Définition de la route nommée pour l'écran de détail
-        'DetailScreen.routeName': (context) => DetailScreen(),
+        //  Définition de la route nommée pour l'écran de détail
+        DetailScreen.routeName: (context) => DetailScreen(),
       },
     );
   }
