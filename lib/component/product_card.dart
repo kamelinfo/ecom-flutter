@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myppa/screens/detail_screen.dart';
 
 class ProductCard extends StatelessWidget {
   final String name;
@@ -16,7 +17,9 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        Navigator.pushNamed(context, DetailScreen.routeName);
+      },
       borderRadius: BorderRadius.circular(12),
       child: Card(
         elevation: 4.0,
