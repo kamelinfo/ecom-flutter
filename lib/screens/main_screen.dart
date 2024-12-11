@@ -5,7 +5,13 @@ class MainScreen extends StatelessWidget {
   MainScreen({
     super.key,
   });
-
+  final List<Map<String, dynamic>> products = List.generate(20, (index) {
+    return {
+      "name": "Futuristic T-Shirt #${index + 1}",
+      "price": "${(index + 1) * 10}",
+      "imageUrl": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+    };
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +25,41 @@ class MainScreen extends StatelessWidget {
       ),
 
       // Body inchangé : texte au centre
-      body: ProductCard(
-        name: "Futuristic T-Shirt",
-        price: "29.99",
-        imageUrl: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        onTap: () {
-          // Action lorsque l'on clique sur la carte
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          // On choisit une largeur de carte approximative (par ex. 180 pixels).
+          // En divisant la largeur disponible par 180, on obtient un nombre "idéal" de colonnes.
+          double cardWidth = 180.0;
+          int crossAxisCount = (constraints.maxWidth / cardWidth).floor();
+
+          // On s’assure qu’il y ait au moins 2 colonnes.
+          if (crossAxisCount < 2) {
+            crossAxisCount = 2;
+          }
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridView.builder(
+              itemCount: products.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
+                childAspectRatio: 0.7,
+              ),
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return ProductCard(
+                  name: product["name"],
+                  price: product["price"],
+                  imageUrl: product["imageUrl"],
+                  onTap: () {
+                    // Action au clic sur un produit (par ex: navigation vers détails)
+                  },
+                );
+              },
+            ),
+          );
         },
       ),
       // BottomNavigationBar avec un fond coloré et des icônes contrastées

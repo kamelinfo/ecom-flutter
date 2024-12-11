@@ -68,6 +68,7 @@ class ProductCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
+            Spacer(),
             Padding(
               padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 12.0),
               child: Text(
