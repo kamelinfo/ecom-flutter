@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({
+  final String name;
+  final String price;
+  final String imageUrl;
+  final VoidCallback? onTap;
+  ProductCard({
     super.key,
+    required this.name,
+    required this.price,
+    required this.imageUrl,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Card(
         elevation: 4.0,
@@ -25,7 +33,7 @@ class ProductCard extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 1,
                   child: Image.network(
-                    "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+                    imageUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -50,7 +58,7 @@ class ProductCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 8.0, left: 12.0, right: 12.0),
               child: Text(
-                'name namenamenamenamenamenamenamenamenamenamename namenamenamename  namename',
+                name,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -63,7 +71,7 @@ class ProductCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 12.0),
               child: Text(
-                "20 da",
+                "$price da",
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontSize: 14,

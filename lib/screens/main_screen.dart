@@ -19,8 +19,14 @@ class MainScreen extends StatelessWidget {
       ),
 
       // Body inchangé : texte au centre
-      body: ProductCard(),
-
+      body: ProductCard(
+        name: "Futuristic T-Shirt",
+        price: "29.99",
+        imageUrl: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        onTap: () {
+          // Action lorsque l'on clique sur la carte
+        },
+      ),
       // BottomNavigationBar avec un fond coloré et des icônes contrastées
       bottomNavigationBar: bottomNav(),
     );
