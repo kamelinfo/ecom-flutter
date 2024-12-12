@@ -48,23 +48,13 @@ class DetailScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "${product['price']} da ",
+                    product['price'],
                     style: TextStyle(
                       fontSize: 22,
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  (product['price'] < 50)
-                      ? Text(
-                          '50 da',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.red,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )
-                      : SizedBox(),
                   SizedBox(width: 16),
                   // Rating stars
                   Row(

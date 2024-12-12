@@ -1,37 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:myppa/screens/detail_screen.dart';
 
 class ProductCard extends StatelessWidget {
   final String name;
   final String price;
   final String imageUrl;
-  final int rating; // Nouvelle propriété pour le rating
   final VoidCallback? onTap;
 
   const ProductCard({
     required this.name,
     required this.price,
     required this.imageUrl,
-    this.rating = 0, // Valeur par défaut
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // Navigation vers l'écran de détail avec les informations du produit
-        Navigator.pushNamed(
-          context,
-          DetailScreen.routeName,
-          arguments: {
-            'name': name,
-            'price': price,
-            'imageUrl': imageUrl,
-            'rating': rating, // Passer le rating
-          },
-        );
-      },
+      onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Card(
         elevation: 4.0,
@@ -42,7 +27,6 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Partie image avec icône favoris
             Stack(
               children: [
                 AspectRatio(
@@ -70,8 +54,6 @@ class ProductCard extends StatelessWidget {
                 ),
               ],
             ),
-
-            // Section texte (nom + prix)
             Padding(
               padding: const EdgeInsets.only(top: 8.0, left: 12.0, right: 12.0),
               child: Text(
@@ -85,7 +67,6 @@ class ProductCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            Spacer(),
             Padding(
               padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 12.0),
               child: Text(
